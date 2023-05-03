@@ -1,7 +1,7 @@
 import DollarApp from "../components/DollarApp";
 
 export default async function Home() {
-  const res = await fetch("https://www.dolarsi.com/api/api.php?type=valoresprincipales");
+  const res = await fetch(String(process.env.DOLAR_URL));
   const data = (await res.json()) as {
     casa: {nombre: string; compra: string; venta: string};
   }[];
