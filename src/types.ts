@@ -3,3 +3,5 @@ export interface Dolar {
   venta: string;
   nombre: string;
 }
+
+export type Moneda = "ARS" | "USD";

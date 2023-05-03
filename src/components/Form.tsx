@@ -1,16 +1,18 @@
 interface FormProps {
   amount: number;
   onChange: (amount: number) => void;
+  moneda: string;
 }
 
-export default function Form({amount, onChange}: FormProps) {
+export default function Form({amount, onChange, moneda}: FormProps) {
   return (
     <div className="text-black">
       <label className="text-2xl" htmlFor="monto">
-        Monto
+        Monto en {moneda}
+        {/* {moneda === "ARS" ? } */}
       </label>
       <input
-        className="border-2 rounded-md p-1 text-right"
+        className="border-2 rounded-md p-1 text-right w-[240px]"
         id="monto"
         min={0}
         type="number"
