@@ -19,7 +19,7 @@ export default function DollarApp({dolar}: {dolar: Dolar[]}) {
   return (
     <main className={`${inter.className} flex flex-col md:flex-row h-full gap-4`}>
       <section className="flex flex-col flex-1">
-        <Form amount={amount} moneda={moneda} onChange={(_amount: number) => setAmount(_amount)} />
+        <Form moneda={moneda} onChange={(_amount: number) => setAmount(_amount)} />
         <SelectCurrency moneda={moneda} setMoneda={(_moneda: Moneda) => setMoneda(_moneda)} />
       </section>
       <section className="flex-1 bg-green-800 rounded-md p-2">
@@ -41,7 +41,7 @@ export default function DollarApp({dolar}: {dolar: Dolar[]}) {
                   </p>
                 </div>
                 {amount ? (
-                  <div className="w-2/4 text-right">
+                  <div className="w-2/4 text-right text-white">
                     <p>Son:</p>
                     <p className="font-bold text-sm">
                       {moneda === "ARS"
