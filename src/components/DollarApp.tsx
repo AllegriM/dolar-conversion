@@ -17,7 +17,7 @@ export default function DollarApp({dolar}: {dolar: Dolar[]}) {
   const [moneda, setMoneda] = useState<Moneda>("ARS");
 
   return (
-    <main className={`${inter.className} flex h-full gap-4`}>
+    <main className={`${inter.className} flex flex-col md:flex-row h-full gap-4`}>
       <section className="flex flex-col flex-1">
         <Form amount={amount} moneda={moneda} onChange={(_amount: number) => setAmount(_amount)} />
         <SelectCurrency moneda={moneda} setMoneda={(_moneda: Moneda) => setMoneda(_moneda)} />

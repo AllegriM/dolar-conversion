@@ -8,7 +8,7 @@ export default function SelectCurrency({
   moneda: Moneda;
 }) {
   return (
-    <div className="flex justify-around w-[240px] my-auto text-black">
+    <div className="flex justify-center gap-20 md:w-[240px] my-auto text-black">
       <button
         className={`${
           moneda === "ARS" ? "bg-gray-200" : ""
