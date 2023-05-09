@@ -1,7 +1,11 @@
 import DollarApp from "../components/DollarApp";
 
 export default async function Home() {
-  const res = await fetch(String(process.env.DOLAR_URL));
+  const res = await fetch(String(process.env.DOLAR_URL), {
+    next: {
+      revalidate: 60,
+    },
+  });
   const data = (await res.json()) as {
     casa: {nombre: string; compra: string; venta: string};
   }[];
@@ -14,8 +18,9 @@ export default async function Home() {
 
       return {
         nombre,
-        compra,
-        venta,
+        // compra y venta son strings, pero necesitamos que sean numbers y que tengan 2 decimales
+        compra: parseFloat(compra.replace(",", ".")),
+        venta: parseFloat(venta.replace(",", ".")),
       };
     });
 

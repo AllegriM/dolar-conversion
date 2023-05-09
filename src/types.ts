@@ -1,6 +1,6 @@
 export interface Dolar {
-  compra: string;
-  venta: string;
+  compra: number;
+  venta: number;
   nombre: string;
 }
 

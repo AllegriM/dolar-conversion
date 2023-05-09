@@ -2,7 +2,7 @@
 
 import type {Dolar, Moneda} from "@/types";
 
-import {Inter} from "next/font/google";
+import {Roboto_Mono} from "next/font/google";
 import {useState} from "react";
 
 import Form from "./Form";
@@ -10,14 +10,15 @@ import SelectCurrency from "./SelectCurrency";
 
 // Type moneda as ARS or USD
 
-const inter = Inter({subsets: ["latin"]});
+const font = Roboto_Mono({subsets: ["latin"]});
 
 export default function DollarApp({dolar}: {dolar: Dolar[]}) {
+  console.log(dolar);
   const [amount, setAmount] = useState<number>(0);
   const [moneda, setMoneda] = useState<Moneda>("ARS");
 
   return (
-    <main className={`${inter.className} flex flex-col md:flex-row h-full gap-4`}>
+    <main className={`${font.className} flex flex-col md:flex-row h-full gap-4`}>
       <section className="flex flex-col flex-1">
         <Form moneda={moneda} onChange={(_amount: number) => setAmount(_amount)} />
         <SelectCurrency moneda={moneda} setMoneda={(_moneda: Moneda) => setMoneda(_moneda)} />
@@ -33,20 +34,18 @@ export default function DollarApp({dolar}: {dolar: Dolar[]}) {
             return (
               <li key={dolarInfo.nombre} className="flex items-center justify-between p-2">
                 <div className="w-2/4">
-                  <p className="text-md  pr-2 text-emerald-400 font-bold">
+                  <p className="text-sm  pr-2 text-emerald-400 font-bold">
                     {dolarInfo.nombre === "Dolar Contado con Liqui" ? "CCL" : dolarInfo.nombre}
                   </p>
-                  <p className="text-sm text-emerald-400">
-                    {formatMoney.format(parseFloat(dolarInfo.venta))}
-                  </p>
+                  <p className="text-md text-emerald-100">{formatMoney.format(dolarInfo.venta)}</p>
                 </div>
                 {amount ? (
-                  <div className="w-2/4 text-right text-white">
+                  <div className="w-2/4 text-right text-emerald-400">
                     <p>Son:</p>
-                    <p className="font-bold text-sm">
+                    <p className="font-bold text-sm text-white">
                       {moneda === "ARS"
-                        ? formatMoney.format(amount / parseFloat(dolarInfo.compra))
-                        : formatMoney.format(amount * parseFloat(dolarInfo.venta))}
+                        ? formatMoney.format(amount / dolarInfo.compra)
+                        : formatMoney.format(amount * dolarInfo.venta)}
                     </p>
                   </div>
                 ) : null}
