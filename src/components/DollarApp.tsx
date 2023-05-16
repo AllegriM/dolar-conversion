@@ -1,6 +1,7 @@
 "use client";
 
-import type {Dolar, Moneda} from "@/types";
+import type {Moneda} from "@/types";
+import type {DolarData} from "@/app/page";
 
 import {Roboto_Mono} from "next/font/google";
 import {useState} from "react";
@@ -12,19 +13,18 @@ import SelectCurrency from "./SelectCurrency";
 
 const font = Roboto_Mono({subsets: ["latin"]});
 
-export default function DollarApp({dolar}: {dolar: Dolar[]}) {
-  console.log(dolar);
+export default function DollarApp({dolar}: {dolar: DolarData[]}) {
   const [amount, setAmount] = useState<number>(0);
   const [moneda, setMoneda] = useState<Moneda>("ARS");
 
   return (
-    <main className={`${font.className} flex flex-col md:flex-row h-full gap-4`}>
-      <section className="flex flex-col flex-1">
+    <main className={`${font.className} h-full gap-4`}>
+      <section className="flex flex-col items-center">
         <Form moneda={moneda} onChange={(_amount: number) => setAmount(_amount)} />
         <SelectCurrency moneda={moneda} setMoneda={(_moneda: Moneda) => setMoneda(_moneda)} />
       </section>
-      <section className="flex-1 bg-green-800 rounded-md p-2">
-        <ul>
+      <section>
+        <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
           {dolar.map((dolarInfo) => {
             const formatMoney = new Intl.NumberFormat("es-AR", {
               style: "currency",
@@ -32,20 +32,37 @@ export default function DollarApp({dolar}: {dolar: Dolar[]}) {
             });
 
             return (
-              <li key={dolarInfo.nombre} className="flex items-center justify-between p-2">
-                <div className="w-2/4">
-                  <p className="text-sm  pr-2 text-emerald-400 font-bold">
-                    {dolarInfo.nombre === "Dolar Contado con Liqui" ? "CCL" : dolarInfo.nombre}
-                  </p>
-                  <p className="text-md text-emerald-100">{formatMoney.format(dolarInfo.venta)}</p>
+              <li
+                key={dolarInfo.type}
+                className="items-center bg-white justify-between p-2 border-t-4 border-t-green-800"
+              >
+                <div className={`${amount ? "pb-0" : "pb-[44px]"} flex flex-col gap-3 `}>
+                  <h4 className="text-2xl text-center text-emerald-500 font-bold">
+                    {dolarInfo.type}
+                  </h4>
+                  <div className="flex justify-around">
+                    <div>
+                      <p className="text-center text-gray-500">Compra</p>
+                      <span className="text-md font-bold text-green-500">
+                        {formatMoney.format(dolarInfo.buy)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-center text-gray-500">Venta</p>
+                      <span className="text-md font-bold text-green-500">
+                        {formatMoney.format(dolarInfo.sell)}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-xs text-gray-500">{dolarInfo.updatedAt}</span>
                 </div>
                 {amount ? (
-                  <div className="w-2/4 text-right text-emerald-400">
+                  <div className="text-gray-500">
                     <p>Son:</p>
-                    <p className="font-bold text-sm text-white">
+                    <p className="font-bold text-sm text-green-500">
                       {moneda === "ARS"
-                        ? formatMoney.format(amount / dolarInfo.compra)
-                        : formatMoney.format(amount * dolarInfo.venta)}
+                        ? formatMoney.format(amount / dolarInfo.buy)
+                        : formatMoney.format(amount * dolarInfo.sell)}
                     </p>
                   </div>
                 ) : null}

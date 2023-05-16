@@ -11,8 +11,8 @@ export default function SelectCurrency({
     <div className="flex justify-center gap-20 md:w-[240px] my-auto text-black">
       <button
         className={`${
-          moneda === "ARS" ? "bg-gray-200" : ""
-        } border px-4 py-2 text-lg rounded-md hover:bg-gray-200`}
+          moneda === "ARS" ? "bg-neutral-700" : ""
+        } font-bold text-white border border-gray-500 px-4 py-2 text-lg rounded-md hover:bg-gray-200 hover:text-black`}
         type="button"
         onClick={() => setMoneda("ARS")}
       >
@@ -20,8 +20,8 @@ export default function SelectCurrency({
       </button>
       <button
         className={`${
-          moneda === "USD" ? "bg-gray-200" : ""
-        } border px-4 py-2 text-lg rounded-md hover:bg-gray-200`}
+          moneda === "USD" ? "bg-neutral-700" : ""
+        } font-bold text-white border border-gray-500 px-4 py-2 text-lg rounded-md hover:bg-gray-200 hover:text-black`}
         type="button"
         onClick={() => setMoneda("USD")}
       >
