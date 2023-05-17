@@ -15,7 +15,7 @@ const formatMoney = new Intl.NumberFormat("es-AR", {
 
 const font = Roboto_Mono({subsets: ["latin"]});
 
-export default function DollarApp({dolar}: {dolar: DolarData[]}) {
+export default function DollarApp(dolar: DolarData[]) {
   const [amount, setAmount] = useState<number>(0);
   const [moneda, setMoneda] = useState<Moneda>("ARS");
   const [operation, setOperation] = useState<Operation>("buy");
