@@ -36,7 +36,7 @@ export default async function Home() {
   //     revalidate: 60,
   //   },
   // });
-  const dolarData: DolarData[] = await dolarScraper();
+  const dolarData = await dolarScraper();
   // const data: DolarData = (await res.json()) as {
   //   casa: {nombre: string; compra: string; venta: string};
   // }[];
