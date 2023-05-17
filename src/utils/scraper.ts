@@ -1,6 +1,3 @@
-import type {DolarType} from "@/types";
-import type {DolarData} from "@/app/page";
-
 import {JSDOM} from "jsdom";
 
 type TypeOfDolarsProps = Record<
