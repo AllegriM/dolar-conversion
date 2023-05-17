@@ -1,5 +1,3 @@
-import type {DolarType} from "@/types";
-
 import {dolarScraper} from "@/utils/scraper";
 
 import DollarApp from "../components/DollarApp";
@@ -31,13 +29,6 @@ import DollarApp from "../components/DollarApp";
 //     updatedAt: 'Actualizado el 16/05/23 06:51 PM'
 //   }
 // }
-
-export interface DolarData {
-  type: DolarType;
-  buy: number;
-  sell: number;
-  updatedAt: string;
-}
 
 export default async function Home() {
   // const res = await fetch(String(process.env.DOLAR_URL), {

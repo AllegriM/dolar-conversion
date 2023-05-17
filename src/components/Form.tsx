@@ -1,14 +1,30 @@
 interface FormProps {
   onChange: (amount: number) => void;
   moneda: string;
+  setOperation: (operation: Operation) => void;
 }
 
-export default function Form({onChange, moneda}: FormProps) {
+export default function Form({onChange, moneda, setOperation}: FormProps) {
+  const options = [
+    {value: "buy", label: "Comprar"},
+    {value: "sell", label: "Vender"},
+  ];
+
   return (
     <div className="text-white flex flex-col mx-auto md:mx-0 mb-5">
-      <label className="text-2xl" htmlFor="monto">
-        Monto en {moneda}
-      </label>
+      <div className="flex gap-3">
+        <select
+          className="text-2xl capitalize bg-transparent focus:outline-none cursor-pointer"
+          onChange={(e) => setOperation(e.target.value as Operation)}
+        >
+          {options.map((option) => (
+            <option key={option.value} className="bg-neutral-600" value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <span className="text-2xl"> {moneda}</span>
+      </div>
       <div className="relative">
         <input
           className="text-black text-left border-2 rounded-md p-1 pl-4 w-[240px] mt-3 focus:outline-0"

@@ -1,5 +1,3 @@
-import type {Moneda} from "@/types";
-
 export default function SelectCurrency({
   setMoneda,
   moneda,
